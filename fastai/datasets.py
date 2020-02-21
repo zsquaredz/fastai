@@ -130,7 +130,7 @@ _checks = {
 #TODO: This can probably be coded more shortly and nicely.
 class Config():
     "Creates a default config file 'config.yml' in $FASTAI_HOME (default `~/.fastai/`)"
-    DEFAULT_CONFIG_LOCATION = os.path.expanduser(os.getenv('FASTAI_HOME', '~/.fastai'))
+    DEFAULT_CONFIG_LOCATION = os.path.expanduser(os.getenv('FASTAI_HOME', '/disk/ocean/zheng/fastai/examples/'))
     DEFAULT_CONFIG_PATH = DEFAULT_CONFIG_LOCATION + '/config.yml'
     DEFAULT_CONFIG = {
         'data_path': DEFAULT_CONFIG_LOCATION + '/data',
