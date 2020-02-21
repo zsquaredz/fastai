@@ -1,6 +1,6 @@
 import fire
 from fastai.text import *
-
+from old.fastai.text import *
 from sampled_sm import *
 
 
