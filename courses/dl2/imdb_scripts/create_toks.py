@@ -1,6 +1,7 @@
 from fastai.text import *
 import html
 import fire
+import spacy
 
 BOS = 'xbos'  # beginning-of-sentence tag
 FLD = 'xfld'  # data field tag
