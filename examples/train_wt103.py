@@ -52,7 +52,7 @@ def main(
         backwards: Param("Backward model", bool)=False
         ):
     "Training on Wikitext 103"
-    path = 'wikitext-103'
+    path = os.curdir/'wikitext-103'
     fastprogress.SAVE_PATH = f'{name}.txt' #Save the output of the progress bar in {name}.txt
     torch.cuda.set_device(gpu)
     if not (path/'data_save.pkl').is_file(): create_data(path)
