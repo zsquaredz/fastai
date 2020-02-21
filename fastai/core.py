@@ -38,7 +38,8 @@ def T(a, half=False, cuda=True):
         elif a.dtype in (np.float32, np.float64):
             a = torch.cuda.HalfTensor(a) if half else torch.FloatTensor(a)
         else: raise NotImplementedError(a.dtype)
-    if cuda: a = to_gpu(a, async=True)
+    if cuda:
+        a = to_gpu(a, async=True)
     return a
 
 def create_variable(x, volatile, requires_grad=False):
