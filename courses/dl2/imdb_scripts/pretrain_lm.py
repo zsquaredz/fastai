@@ -33,8 +33,8 @@ def train_lm(dir_path, cuda_id, cl=1, bs=64, backwards=False, lr=3e-4, sampled=T
     itos = pickle.load(open(p / 'tmp/itos.pkl', 'rb'))
     vs = len(itos)
 
-    trn_dl = LanguageModelLoader(trn_lm, bs, bptt)
-    val_dl = LanguageModelLoader(val_lm, bs//5 if sampled else bs, bptt)
+    trn_dl = LanguageModelPreLoader(trn_lm, bs, bptt)
+    val_dl = LanguageModelPreLoader(val_lm, bs//5 if sampled else bs, bptt)
     md = LanguageModelData(p, 1, vs, trn_dl, val_dl, bs=bs, bptt=bptt)
 
     tprs = get_prs(trn_lm, vs)
