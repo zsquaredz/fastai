@@ -43,7 +43,7 @@ def create_data(path):
 @call_parse
 def main(
         name:Param("Name of the experiment", str, opt=False),
-        gpu:Param("GPU to run on", int)=0,
+        local_rank:Param("GPU to run on", int),
         lr: Param("Learning rate", float)=1e-2,
         drop_mult: Param("Dropouts multiplicator", float)=0.1,
         wd: Param("Weight Decay", float)=0.1,
@@ -55,7 +55,7 @@ def main(
     "Training on Wikitext 103"
     path = Config().data_path()/'wikitext-103'
     fastprogress.SAVE_PATH = f'{name}.txt' #Save the output of the progress bar in {name}.txt
-    torch.cuda.set_device(gpu)
+    torch.cuda.set_device(local_rank)
     torch.distributed.init_process_group(backend='nccl', init_method='env://')
     if not (path/'data_save.pkl').is_file(): create_data(path)
     data = load_data(path, bs=bs, bptt=bptt, backwards=backwards)
@@ -63,7 +63,7 @@ def main(
                                    metrics=[accuracy, Perplexity()])
     learn = learn.to_fp16(clip=0.1)
 
-    learn = learn.to_distributed(gpu)
+    learn = learn.to_distributed(local_rank)
 
     learn.fit_one_cycle(epochs, lr, moms=(0.8,0.7), div_factor=10, wd=wd)
 
