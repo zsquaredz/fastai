@@ -56,14 +56,14 @@ def main(
     path = Config().data_path()/'wikitext-103'
     fastprogress.SAVE_PATH = f'{name}.txt' #Save the output of the progress bar in {name}.txt
     torch.cuda.set_device(local_rank)
-    torch.distributed.init_process_group(backend='nccl', init_method='env://', find_unused_parameters=True)
+    torch.distributed.init_process_group(backend='nccl', init_method='env://')
     if not (path/'data_save.pkl').is_file(): create_data(path)
     data = load_data(path, bs=bs, bptt=bptt, backwards=backwards)
     learn = language_model_learner(data, AWD_LSTM, drop_mult=drop_mult, pretrained=False,
                                    metrics=[accuracy, Perplexity()])
     learn = learn.to_fp16(clip=0.1)
 
-    learn = learn.to_distributed(local_rank)
+    learn = learn.to_distributed(local_rank, find_unused_parameters=True)
 
     learn.fit_one_cycle(epochs, lr, moms=(0.8,0.7), div_factor=10, wd=wd)
 
