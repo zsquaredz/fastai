@@ -44,7 +44,7 @@ def create_data(path):
 def main(
         name:Param("Name of the experiment", str, opt=False),
         local_rank:Param("GPU to run on", int),
-        lr: Param("Learning rate", float)=1e-2,
+        lr: Param("Learning rate", float)=0.0025,
         drop_mult: Param("Dropouts multiplicator", float)=0.1,
         wd: Param("Weight Decay", float)=0.1,
         epochs: Param("Number of epochs", int)=12,
