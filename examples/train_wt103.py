@@ -48,7 +48,7 @@ def main(
         drop_mult: Param("Dropouts multiplicator", float)=0.1,
         wd: Param("Weight Decay", float)=0.1,
         epochs: Param("Number of epochs", int)=12,
-        bs: Param("Batch size", int)=256,
+        bs: Param("Batch size", int)=128,
         bptt: Param("Bptt", int)=80,
         backwards: Param("Backward model", bool)=False
         ):
