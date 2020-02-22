@@ -29,7 +29,7 @@ class DistributedTrainer(LearnerCallback):
         return old_dl,new_dl,sampler
 
     def on_train_begin(self, **kwargs):
-        self.learn.model = DistributedDataParallel(self.model, device_ids=[self.cuda_id], output_device=self.cuda_id)
+        self.learn.model = DistributedDataParallel(self.model, device_ids=[self.cuda_id], output_device=self.cuda_id, find_unused_parameters=True)
         shuffle = self.data.train_dl.init_kwargs['shuffle'] if hasattr(self.data.train_dl, 'init_kwargs') else True
         shuffle_train = True if isinstance(self.data, TextClasDataBunch) else shuffle
         self.old_train_dl,self.data.train_dl,self.train_sampler = self._change_dl(self.data.train_dl, shuffle_train)

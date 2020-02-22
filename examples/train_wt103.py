@@ -63,7 +63,7 @@ def main(
                                    metrics=[accuracy, Perplexity()])
     learn = learn.to_fp16(clip=0.1)
 
-    learn = learn.to_distributed(local_rank, find_unused_parameters=True)
+    learn = learn.to_distributed(local_rank)
 
     learn.fit_one_cycle(epochs, lr, moms=(0.8,0.7), div_factor=10, wd=wd)
 
