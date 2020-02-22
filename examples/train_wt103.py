@@ -42,8 +42,8 @@ def create_data(path):
 
 @call_parse
 def main(
-        name:Param("Name of the experiment", str, opt=False),
         local_rank:Param("GPU to run on", int),
+        name:Param("Name of the experiment", str, opt=False)='wt103_fwd',
         lr: Param("Learning rate", float)=0.0025,
         drop_mult: Param("Dropouts multiplicator", float)=0.1,
         wd: Param("Weight Decay", float)=0.1,
