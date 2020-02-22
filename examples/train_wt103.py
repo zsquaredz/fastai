@@ -6,6 +6,7 @@
 from fastai.text import *
 from fastai.script import *
 from fastprogress import fastprogress
+from fastai.distributed import *
 
 #Functions to parse WT103 in separate articles
 def istitle(line):
@@ -42,7 +43,7 @@ def create_data(path):
 @call_parse
 def main(
         name:Param("Name of the experiment", str, opt=False),
-        gpu:Param("GPU to run on", int)=0,
+        gpu:Param("GPU to run on", int)=4,
         lr: Param("Learning rate", float)=1e-2,
         drop_mult: Param("Dropouts multiplicator", float)=0.1,
         wd: Param("Weight Decay", float)=0.1,
